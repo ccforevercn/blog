@@ -296,6 +296,19 @@ class ConfigMessageSeeder extends Seeder
                 'add_time' => time(),
                 'is_show' => 1,
                 'is_del' => 0
+            ],
+            [
+                'id' => 22,
+                'name' => '微信二维码',
+                'description' => '站长微信二维码',
+                'select' => 'config_service_wechat_code',
+                'type' => 4,
+                'type_value' => '',
+                'value' => '',
+                'category_id' => 3,
+                'add_time' => time(),
+                'is_show' => 1,
+                'is_del' => 0
             ]
         ]);
     }
