@@ -345,7 +345,7 @@ import UploadImage from "@/components/UploadImage";
 import TinyMceEditor from "@/components/TinyMceEditor";
 import Markdown from "@/components/Markdown";
 import ViewPicture from "@/components/ViewPicture";
-import { secondToTime, millisecondToSecond } from "@/utils/time";
+import { millisecondToSecond } from "@/utils/time";
 
 export default {
   components: {
@@ -362,9 +362,6 @@ export default {
     typeTypeFilter(index) {
       var indexTypeArr = ["warning", "success"];
       return indexTypeArr[index];
-    },
-    timeFilter(second) {
-      return secondToTime(second);
     },
   },
   data() {

@@ -53,7 +53,7 @@ service.interceptors.response.use(
   },
   error => {
     const result = error.response
-    var message = result ? result.data.message : "请求失败"
+    var message = result.data.message ? result.data.message : "请求失败"
     Message({
       message: message,
       type: 'error',

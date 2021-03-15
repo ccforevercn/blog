@@ -1,3 +1,4 @@
 /vendor
 /.idea
 /view/admin/node_modules
+/view/admin/package-lock.json

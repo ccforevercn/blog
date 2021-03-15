@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: process.env.VUE_APP_PAGE_TITLE || 'cc_forever',
+  title: process.env.VUE_APP_PAGE_TITLE || '博客',
 
   /**
    * @type {boolean} true | false
