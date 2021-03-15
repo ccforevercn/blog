@@ -1,0 +1,5 @@
+/vendor
+/.idea
+/.env
+/view/admin/node_modules
+/view/admin/package-lock.json
