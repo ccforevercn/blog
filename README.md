@@ -28,4 +28,4 @@ php artisan db:seed
 ##### 密码：blogadmin888
 
 ##### 演示网站
-[博客网站](https://show.ccforever.cn "博客网站")
+[博客网站](http://show.ccforever.cn "博客网站")
