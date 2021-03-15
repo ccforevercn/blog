@@ -43,6 +43,9 @@ class HandleArray
                 case 'array':
                     $valueArr = array_key_exists($select, $array) && !is_null($array[$select]) ? [$select => (array)$array[$select]] : [];
                     break;
+                case 'object':
+                    $valueArr = array_key_exists($select, $array) && !is_null($array[$select]) ? [$select => (object)$array[$select]] : [];
+                    break;
                 default:
                     $valueArr = array_key_exists($select, $array) && !is_null($array[$select]) ? [$select => $array[$select]] : [];
             }

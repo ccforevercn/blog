@@ -108,7 +108,7 @@ class UploadsRepository implements InterfacesRepository
     {
         // TODO: Implement insert() method.
         // 重置添加数据
-        $insert = $this->array->getNotNull($data, 'string', ['file'], ['path']);
+        $insert = $this->array->getNotNull($data, 'string', ['file', 'object'], ['path']);
         // 验证必要参数名称是否为空
         $checkKey = $this->array->isKey($insert, 'file', 'path');
         if(!$checkKey){ throw new ExceptionsUploads("请填写必填参数值"); }
