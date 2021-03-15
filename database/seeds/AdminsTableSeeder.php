@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * 管理员表默认数据
+ *
  * Class AdminsTableSeeder
  */
 class AdminsTableSeeder extends Seeder

@@ -205,8 +205,13 @@ class AdminsRepository implements InterfacesRepository
         if(!$checkId) { throw new ExceptionsAdmins("参数错误"); }
         // 重置修改数据
         $update = $this->array->getNotNull($data, 'string', ['password'], ['real_name'], ['status', 'int'], ['found', 'int'], ['rule_id', 'int'], ['email']);
-        // 验证必要编号是否存在
-        $checkKey = $this->array->isKey($update,'real_name', 'status', 'found', 'rule_id', 'email');
+        if($this->login->tokenId() === $id) {
+            // 验证必要编号是否存在
+            $checkKey = $this->array->isKey($update,'real_name', 'email');
+        }else{
+            // 验证必要编号是否存在
+            $checkKey = $this->array->isKey($update,'real_name', 'status', 'found', 'rule_id', 'email');
+        }
         if(!$checkKey){ throw new ExceptionsAdmins("请填写必填参数值"); }
         // 修改密码
         if(array_key_exists('password', $update)){
@@ -222,9 +227,10 @@ class AdminsRepository implements InterfacesRepository
         $checkUpdate = $this->model->first($this->model->table, $id, array_keys($update)) === $update;
         if($checkUpdate) { return; }
         // 验证规则编号是否存在
-        $checkRuleId = $this->rulesRepository->checkId($update['rule_id']);
-        // 规则编号不存在
-        if(!$checkRuleId){ throw new ExceptionsAdmins("规则不存在"); }
+        if(array_key_exists('rule_id', $update)) {
+            $checkRuleId = $this->rulesRepository->checkId($update['rule_id']);
+            if(!$checkRuleId){ throw new ExceptionsAdmins("规则不存在"); } // 规则编号不存在
+        }
         // 下级编号
         $subordinateIds = $this->subordinateIds($this->login->tokenId());
         // 验证是否可以修改

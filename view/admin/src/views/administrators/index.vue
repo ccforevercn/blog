@@ -23,6 +23,7 @@
 
 <script>
 import { getAdmin } from "@/utils/auth";
+import { PutUpdate } from "@/api/admins";
 export default {
   data() {
     return {
@@ -47,15 +48,11 @@ export default {
   methods: {
     dialogSubmit() {
       var that = this;
-      SetUpdate({})
-        .then((res) => {
-          that.$message({ type: "success", message: res.msg || "修改成功" });
+      PutUpdate(that.admin)
+        .then(() => {
           that.dialogVisible = false;
           that.$store.dispatch("user/logout");
           that.$router.push({ path: "/login" });
-        })
-        .catch((message) => {
-          that.$message({ type: "error", message: message });
         });
     },
   },
