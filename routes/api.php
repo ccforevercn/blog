@@ -110,7 +110,7 @@ Route::group(['prefix'=> '/v1/cms'], function(){ // 后台路由组
             Route::post('/menus/insert', 'MenusController@insert');// 添加
             Route::put('/menus/update', 'MenusController@update');// 修改
             Route::delete('/menus/delete', 'MenusController@delete');// 删除
-            Route::get('/menus/menus', 'MenusController@menus');// 所有
+            Route::get('/menus/menus', 'MenusController@menus');// 全部
             Route::get('/menus/sidebar', 'MenusController@sidebar');// 侧边栏
             // 规则接口
             Route::get('/rules/list', 'RulesController@lst');// 列表
@@ -123,11 +123,11 @@ Route::group(['prefix'=> '/v1/cms'], function(){ // 后台路由组
             Route::get('/rules/rules', 'RulesController@rules');// 所有(当前管理员的所有规则)
         });
         Route::namespace('upload')->group(function () { // 上传文件路由组
-            // 文件接口
-            Route::get('/uploads/list', 'UploadsController@list');// 列表
-            Route::get('/uploads/count', 'UploadsController@count');// 总数
-            Route::post('/uploads/insert', 'UploadsController@insert');// 上传
-            Route::delete('/uploads/delete', 'UploadsController@delete');// 删除
+            // 图片接口
+            Route::get('/image/list', 'ImageController@list');// 列表
+            Route::get('/image/count', 'ImageController@count');// 总数
+            Route::post('/image/insert', 'ImageController@insert');// 上传
+            Route::delete('/image/delete', 'ImageController@delete');// 删除
         });
     });
 });

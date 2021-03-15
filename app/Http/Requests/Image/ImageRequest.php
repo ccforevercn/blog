@@ -5,17 +5,17 @@
  * @license  https://github.com/ccforevercn
  * @day:     2020/8/21
  */
-namespace App\Http\Requests\Upload;
+namespace App\Http\Requests\Image;
 
 use App\Http\Requests\Request;
 
 /**
  * 添加验证
  *
- * Class UploadsRequest
- * @package App\Http\Requests\Upload
+ * Class ImageRequest
+ * @package App\Http\Requests\Image
  */
-class UploadsRequest extends Request
+class ImageRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

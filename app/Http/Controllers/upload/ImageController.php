@@ -11,28 +11,28 @@ use App\CcForever\{
     controller\BaseController,
     traits\Controller as TraitsController
 };
-use App\Exceptions\Uploads as ExceptionsUploads;
-use App\Http\Requests\Upload\UploadsRequest;
-use App\Repositories\UploadsRepository;
+use App\Exceptions\Image as ExceptionsUploads;
+use App\Http\Requests\Image\ImageRequest;
+use App\Repositories\ImageRepository;
 
 /**
- * 文件上传
+ * 图片上传
  *
- * Class UploadsController
+ * Class ImageController
  * @package App\Http\Controllers\upload
  */
-class UploadsController extends BaseController
+class ImageController extends BaseController
 {
     use TraitsController;
     /**
-     * @var UploadsRepository
+     * @var ImageRepository
      */
     private $uploads;
 
     public function __construct()
     {
         parent::__construct();
-        $this->uploads = new UploadsRepository();
+        $this->uploads = new ImageRepository();
     }
 
     /**
@@ -72,10 +72,10 @@ class UploadsController extends BaseController
     /**
      * 添加
      *
-     * @param UploadsRequest $request
+     * @param ImageRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function insert(UploadsRequest $request): \Illuminate\Http\JsonResponse
+    public function insert(ImageRequest $request): \Illuminate\Http\JsonResponse
     {
         // TODO: Implement insert() method.
         try {

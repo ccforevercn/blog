@@ -8,7 +8,7 @@
 
 namespace App\Repositories;
 
-use App\Exceptions\{Database, Uploads as ExceptionsUploads };
+use App\Exceptions\{Database, Image as ExceptionsImage };
 use App\CcForever\{
     interfaces\Repository as InterfacesRepository,
     service\Check,
@@ -22,10 +22,10 @@ use App\Models\Uploads;
 /**
  * 文件上传
  *
- * Class UploadsRepository
+ * Class ImageRepository
  * @package App\Repositories
  */
-class UploadsRepository implements InterfacesRepository
+class ImageRepository implements InterfacesRepository
 {
      use TraitsRepository,UploadsValidateTrait;
 
@@ -58,7 +58,7 @@ class UploadsRepository implements InterfacesRepository
      * @param int $page
      * @param int $limit
      * @return array
-     * @throws ExceptionsUploads
+     * @throws ExceptionsImage
      */
     public function lst(array $where, array $order, int $page, int $limit): array
     {
@@ -67,12 +67,12 @@ class UploadsRepository implements InterfacesRepository
         // 验证父级编号，如果父级编号不存在则返回所有权限下的管理员
         $adminIds = (new AdminsRepository())->subordinateIds($this->login->tokenId()); // 获取当前管理员编号和下级管理员编号
         // 没有下级
-        if(!count($adminIds)) { throw new ExceptionsUploads("暂无列表"); }
+        if(!count($adminIds)) { throw new ExceptionsImage("暂无列表"); }
         try {
             // 获取列表并返回
             return $this->model->lst(['admin_id' => $adminIds], $order, $offset, $limit);
         }catch (Database $exception){
-            throw new ExceptionsUploads($exception->getMessage());
+            throw new ExceptionsImage($exception->getMessage());
         }
     }
 
@@ -81,7 +81,7 @@ class UploadsRepository implements InterfacesRepository
      *
      * @param array $where
      * @return int
-     * @throws ExceptionsUploads
+     * @throws ExceptionsImage
      */
     public function count(array $where): int
     {
@@ -89,12 +89,12 @@ class UploadsRepository implements InterfacesRepository
         // 验证父级编号，如果父级编号不存在则返回所有权限下的管理员
         $adminIds = (new AdminsRepository())->subordinateIds($this->login->tokenId()); // 获取当前管理员编号和下级管理员编号
         // 没有下级
-        if(!count($adminIds)) { throw new ExceptionsUploads("暂无列表"); }
+        if(!count($adminIds)) { throw new ExceptionsImage("暂无列表"); }
         try {
             // 获取列表并返回
             return $this->model->count(['admin_id' => $adminIds]);
         }catch (Database $exception){
-            throw new ExceptionsUploads($exception->getMessage());
+            throw new ExceptionsImage($exception->getMessage());
         }
     }
 
@@ -102,7 +102,7 @@ class UploadsRepository implements InterfacesRepository
      * 添加
      *
      * @param array $data
-     * @throws ExceptionsUploads
+     * @throws ExceptionsImage
      */
     public function insert(array $data): void
     {
@@ -111,12 +111,12 @@ class UploadsRepository implements InterfacesRepository
         $insert = $this->array->getNotNull($data, 'string', ['file', 'object'], ['path']);
         // 验证必要参数名称是否为空
         $checkKey = $this->array->isKey($insert, 'file', 'path');
-        if(!$checkKey){ throw new ExceptionsUploads("请填写必填参数值"); }
+        if(!$checkKey){ throw new ExceptionsImage("请填写必填参数值"); }
         try {
             // 上传文件
             $upload = $this->upload($insert['file'], $insert['path']);
-        }catch (ExceptionsUploads $exception){
-            throw new ExceptionsUploads($exception->getMessage());
+        }catch (ExceptionsImage $exception){
+            throw new ExceptionsImage($exception->getMessage());
         }
         try{
             $insert = [];
@@ -125,13 +125,13 @@ class UploadsRepository implements InterfacesRepository
             $insert['is_del'] = 0;
             $insert['admin_id'] = $this->login->tokenId();
             $this->model->create($insert);
-            throw new ExceptionsUploads("上传文件成功", 200, $upload);
+            throw new ExceptionsImage("上传文件成功", 200, $upload);
         }catch (Database $exception){
             try {
                 $this->remove($data['path']);
-                throw new ExceptionsUploads("上传文件失败");
-            }catch (ExceptionsUploads $exception){
-                throw new ExceptionsUploads($exception->getMessage());
+                throw new ExceptionsImage("上传文件失败");
+            }catch (ExceptionsImage $exception){
+                throw new ExceptionsImage($exception->getMessage());
             }
         }
     }
@@ -141,38 +141,38 @@ class UploadsRepository implements InterfacesRepository
      *
      * @param array $data
      * @param int $id
-     * @throws ExceptionsUploads
+     * @throws ExceptionsImage
      */
     public function update(array $data, int $id): void
     {
         // TODO: Implement update() method.
-        throw new ExceptionsUploads("禁止修改");
+        throw new ExceptionsImage("禁止修改");
     }
 
     /**
      * 删除
      *
      * @param int $id
-     * @throws ExceptionsUploads
+     * @throws ExceptionsImage
      */
     public function delete(int $id): void
     {
         // TODO: Implement delete() method.
         // 验证编号
         $checkId = $this->model->checkId($this->model->table, $id);
-        if(!$checkId){ throw new ExceptionsUploads("已删除，不能重复删除"); }
+        if(!$checkId){ throw new ExceptionsImage("已删除，不能重复删除"); }
         // 获取文件路径
         $upload = $this->model->first($this->model->table, $id, ['path']);
-        if(!count($upload)) { throw new ExceptionsUploads("已删除，不能重复删除"); }
+        if(!count($upload)) { throw new ExceptionsImage("已删除，不能重复删除"); }
         try{
             $this->model->update(['is_del' => 1], $id); // 删除
             try {
                 $this->remove($upload['path']); // 硬盘删除
-            }catch (ExceptionsUploads $exception) {
-                throw new ExceptionsUploads($exception->getMessage());
+            }catch (ExceptionsImage $exception) {
+                throw new ExceptionsImage($exception->getMessage());
             }
         }catch (Database $exception) {
-            throw new ExceptionsUploads($exception->getMessage());
+            throw new ExceptionsImage($exception->getMessage());
         }
     }
 }

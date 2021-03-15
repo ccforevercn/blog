@@ -11,12 +11,12 @@ namespace App\Exceptions;
 use Throwable;
 
 /**
- * 文件上传异常处理
+ * 图片上传异常处理
  *
- * Class Uploads
+ * Class Image
  * @package App\Exceptions
  */
-class Uploads extends \Exception
+class Image extends \Exception
 {
     /**
      * 上传信息

@@ -15,7 +15,7 @@ use App\Exceptions\Database;
 /**
  * 文件上传
  *
- * Class Uploads
+ * Class Image
  * @package App\Models
  */
 class Uploads implements InterfacesModel

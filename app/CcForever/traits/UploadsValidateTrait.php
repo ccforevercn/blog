@@ -9,7 +9,7 @@ namespace App\CcForever\traits;
 
 use App\CcForever\service\Time;
 use Illuminate\Support\Facades\Storage;
-use App\Exceptions\Uploads as ExceptionsUploads;
+use App\Exceptions\Image as ExceptionsUploads;
 
 /**
  * 文件上传
