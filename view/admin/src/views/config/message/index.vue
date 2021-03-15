@@ -314,7 +314,7 @@ export default {
       list: null,
       count: 0,
       labelPrefix: "",
-      listLoading: true,
+      listLoading: false,
       dialogTitle: "修改",
       dialogVisible: false,
       dialogType: "insert",
@@ -370,7 +370,7 @@ export default {
       var that = this;
       GetCount(that.where).then((response) => {
         that.count = response.count;
-        that.getList();
+        if(that.count > 0){ that.getList(); }
       });
     },
     closeViewPicture() {

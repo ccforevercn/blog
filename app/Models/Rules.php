@@ -39,12 +39,13 @@ class Rules implements InterfacesModel
     {
         // TODO: Implement lst() method.
         try{
+            $joinAs = 'admin'; // 管理员表别名
             // 查询字段
-            $selects = ['id', 'name', 'menus_id', 'unique', 'admin_id', 'add_time'];
-            $selectSql = [',(SELECT real_name FROM ' . $this->prefix.(new Admins())->table . ' WHERE `id` = '. $this->prefix.$this->table .'.`admin_id`) as admin_name', 'GROUP_CONCAT((SELECT name FROM cc_menus where id in ('. $this->prefix.$this->table .'.`menus_id`))) as menus_name'];
+            $selectSql = [$this->prefix . $this->table.'.`id`', $this->prefix . $this->table.'.`name`', $this->prefix . $this->table.'.`menus_id`', $this->prefix . $this->table.'.`unique`', $this->prefix . $this->table.'.`admin_id`', $this->prefix . $this->table.'.`add_time`', '('.$joinAs.'.`real_name`) as admin_name'];
             $sql = "SELECT ";
-            $sql .= $this->select($selects, $selectSql);
+            $sql .= $this->select([], $selectSql);
             $sql .= " FROM ".$this->prefix . $this->table;
+            $sql .= $this->join('LEFT JOIN', $this->prefix .(new Admins())->table, $joinAs, $joinAs . '.`id` = '.$this->prefix . $this->table. '.`admin_id`');
             $sql .= $this->where($where); // 条件
             $sql .= $this->order($order); // 排序
             $sql .= $this->limit(compact('offset', 'limit')); // 条数

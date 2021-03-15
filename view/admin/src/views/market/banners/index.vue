@@ -161,7 +161,7 @@ export default {
       where: { page: 1, limit: 6 },
       list: null,
       count: 0,
-      listLoading: true,
+      listLoading: false,
       dialogTitle: "添加",
       dialogVisible: false,
       dialogType: "insert",
@@ -177,7 +177,7 @@ export default {
       var that = this;
       GetCount(that.where).then((response) => {
         that.count = response.count;
-        that.getList();
+        if(that.count > 0){ that.getList(); }
       });
     },
     closeViewPicture() {

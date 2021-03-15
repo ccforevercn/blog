@@ -40,7 +40,7 @@
       fit
       highlight-current-row
     >
-      <template slot="empty">暂无</template>
+      <template slot="empty">暂无栏目</template>
       <el-table-column align="center" label="编号" width="80">
         <template slot-scope="scope">{{ scope.row.id }}</template>
       </el-table-column>
@@ -366,7 +366,7 @@ export default {
       where: { page: 1, limit: 10, parent_id: "0" },
       list: null,
       count: 0,
-      listLoading: true,
+      listLoading: false,
       dialogTitle: "添加",
       dialogVisible: false,
       dialogType: "insert",
@@ -423,7 +423,7 @@ export default {
       var that = this;
       GetCount(that.where).then((response) => {
         that.count = response.count;
-        that.getList();
+        if(that.count > 0){ that.getList(); }
       });
     },
     getList() {

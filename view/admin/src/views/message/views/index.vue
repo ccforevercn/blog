@@ -133,7 +133,7 @@ export default {
       where: { page: 1, limit: 6, type: "" },
       list: null,
       count: 0,
-      listLoading: true,
+      listLoading: false,
       dialogTitle: "添加",
       dialogVisible: false,
       dialogType: "insert",
@@ -146,14 +146,10 @@ export default {
   methods: {
     getCount() {
       var that = this;
-      GetCount(that.where)
-        .then((response) => {
-          that.count = response.count;
-          that.getList();
-        })
-        .catch((message) => {
-          that.$message({ type: "error", message: message });
-        });
+      GetCount(that.where).then((response) => {
+        that.count = response.count;
+        if(that.count > 0){ that.getList(); }
+      });
     },
     getList() {
       // 获取视图列表
@@ -164,9 +160,6 @@ export default {
           that.list = response;
           that.listLoading = false;
         })
-        .catch((message) => {
-          that.$message({ type: "error", message: message });
-        });
     },
     setWhere() {
       // 条件筛选

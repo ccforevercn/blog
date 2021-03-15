@@ -215,7 +215,7 @@ export default {
       list: null,
       menus: [],
       count: 0,
-      listLoading: true,
+      listLoading: false,
       dialogTitle: "添加",
       dialogVisible: false,
       dialogType: "insert",
@@ -241,9 +241,9 @@ export default {
   methods: {
     getCount() {
       var that = this;
-      GetList(that.where).then((response) => {
+      GetCount(that.where).then((response) => {
         that.count = response.count;
-        that.getList();
+        if(that.count > 0){ that.getList(); }
       });
     },
     deleteDialog(index) {

@@ -193,7 +193,7 @@ export default {
       list: null,
       rulesIds: [],
       count: 0,
-      listLoading: true,
+      listLoading: false,
       dialogTitle: "修改",
       dialogVisible: false,
       dialogType: "insert",
@@ -216,10 +216,9 @@ export default {
   methods: {
     getCount() {
       var that = this;
-      that.listLoading = true;
       GetCount(that.where).then((response) => {
         that.count = response.count;
-        that.getList();
+        if(that.count > 0) { that.getList(); }
       });
     },
     deleteDialog(index) {
