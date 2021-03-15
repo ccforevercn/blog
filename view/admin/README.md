@@ -13,7 +13,7 @@ npm install
 ```
 # 接口根目录
 VUE_APP_BASE_API = 
-# 网址
+# 网址(为空默认调用当前访问域名)
 VUE_APP_BASE_URL = 
 # 网址默认标题
 VUE_APP_PAGE_TITLE = 
@@ -23,7 +23,7 @@ VUE_APP_PAGE_TITLE =
 ```
 # 接口根目录
 VUE_APP_BASE_API = 
-# 网址
+# 网址(为空默认调用当前访问域名)
 VUE_APP_BASE_URL = 
 # 网址默认标题
 VUE_APP_PAGE_TITLE = 
@@ -33,7 +33,7 @@ VUE_APP_PAGE_TITLE =
 ```
 # 接口根目录
 VUE_APP_BASE_API = 
-# 网址
+# 网址(为空默认调用当前访问域名)
 VUE_APP_BASE_URL = 
 # 网址默认标题
 VUE_APP_PAGE_TITLE = 
