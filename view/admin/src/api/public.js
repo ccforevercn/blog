@@ -23,16 +23,3 @@ export function captcha () {
     method: 'get'
   })
 }
-
-/**
- * 文件上传
- *
- * @param {*} data
- */
-export function upload (data) {
-  return request({
-    url: '/uploads/insert',
-    method: 'post',
-    data
-  })
-}

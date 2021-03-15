@@ -18,7 +18,7 @@
   />
 </template>
 <script>
-import { upload } from "@/api/public";
+import { PostInsert } from "@/api/image";
 
 export default {
   // 单图片上传组件
@@ -151,11 +151,12 @@ export default {
       formData.append("name", that.data.name);
       formData.append("path", that.data.path);
       // 上传文件
-      upload(formData).then((response) => {
+      PostInsert(formData).then((response) => {
         that.$refs.mavon.$img2Url(filename, this.imageUrl + response.path);
       });
     },
     imgDel(filename) {
+      console.log(filename)
       // 图片文件删除回调事件
       console.log("imgDel");
     },

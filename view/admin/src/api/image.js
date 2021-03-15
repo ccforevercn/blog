@@ -1,4 +1,4 @@
-/* 留言api */
+/* 图片api */
 import request from '@/utils/request'
 
 /**
@@ -8,7 +8,7 @@ import request from '@/utils/request'
  */
 export function GetList (data) {
   return request({
-    url: '/board/list',
+    url: '/image/list',
     method: 'get',
     params: data
   })
@@ -16,17 +16,29 @@ export function GetList (data) {
 
 /**
  * 总数
- * 
- * @param {*} data 
+ *
+ * @param {*} data
  */
 export function GetCount (data) {
   return request({
-    url: '/board/count',
+    url: '/image/count',
     method: 'get',
     params: data
   })
 }
 
+/**
+ * 添加
+ *
+ * @param {*} data
+ */
+export function PostInsert (data) {
+  return request({
+    url: '/image/insert',
+    method: 'post',
+    data
+  })
+}
 
 /**
  * 删除
@@ -35,7 +47,7 @@ export function GetCount (data) {
  */
 export function DeleteDelete (data) {
   return request({
-    url: '/board/delete',
+    url: '/image/delete',
     method: 'delete',
     data
   })

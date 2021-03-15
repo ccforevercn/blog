@@ -58,7 +58,7 @@ export default {
   created() {
     var that = this;
     var url = process.env.VUE_APP_BASE_URL || location.origin;
-    that.action = url + process.env.VUE_APP_BASE_API + "/uploads/insert";
+    that.action = url + process.env.VUE_APP_BASE_API + "/image/insert";
     that.data.name = that.name;
     that.data.path = that.path;
     if (that.images.length > 0) {
