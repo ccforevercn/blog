@@ -129,7 +129,7 @@ export default {
       loading: false,
       passwordType: "password",
       redirect: undefined,
-      loginName: "瀚睿智云系统",
+      loginName: "博客后台",
     };
   },
   watch: {
