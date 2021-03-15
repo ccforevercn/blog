@@ -456,7 +456,7 @@ class Caches
         $status = true; // 文件夹创建状态
         foreach ($folders as $key=>$dir) {
             $dir = $total.$dir; // 重置验证文件夹
-            if(!is_dir($dir)) { $status = $status && mkdir($total.$dir); } // 验证文件夹是否存在，不存在则创建
+            if(!is_dir($dir)) { $status = $status && mkdir($dir); } // 验证文件夹是否存在，不存在则创建
             $total .= $dir.DIRECTORY_SEPARATOR; // 追加文件夹
         }
         if(!$status){ throw new ExceptionsCaches("目标文件夹创建失败"); }
