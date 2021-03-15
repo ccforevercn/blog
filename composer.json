@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "ccforever/blog",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Blog website based on laravel",
     "keywords": [
         "framework",
         "laravel"
