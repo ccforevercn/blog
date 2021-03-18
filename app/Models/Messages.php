@@ -137,7 +137,7 @@ class Messages implements InterfacesModel
     {
         try{
             // 查询字段(select)
-            $selectsSql = [',(SELECT `name` FROM ' . $this->prefix.(new Columns())->table . ' WHERE `id` = '.$this->prefix.$this->table.'.`columns_id` AND `is_del` = 0) as `cname`', 'IFNULL((select `content` FROM ' . $this->prefix.(new MessagesContent())->table . ' WHERE `id` = '.$this->prefix.$this->table.'.`id`),"暂无内容") as content', 'IFNULL((select `images` FROM ' . $this->prefix.(new MessagesContent())->table . ' WHERE `id` = '.$this->prefix.$this->table.'.`id`), "") as images', 'IFNULL((SELECT GROUP_CONCAT(`name`) from '. $this->prefix.(new Tags())->table .' WHERE id IN(SELECT `tag_id` FROM '. $this->prefix.(new MessagesTags())->table .' where `unique` = '.$this->prefix.$this->table.'.`unique`)), "") as tag_name'];
+            $selectsSql = [',(SELECT `name` FROM ' . $this->prefix.(new Columns())->table . ' WHERE `id` = '.$this->prefix.$this->table.'.`columns_id` AND `is_del` = 0) as `cname`', 'IFNULL((select `content` FROM ' . $this->prefix.(new MessagesContent())->table . ' WHERE `id` = '.$this->prefix.$this->table.'.`id`),"暂无内容") as content', 'IFNULL((SELECT GROUP_CONCAT(`name`) from '. $this->prefix.(new Tags())->table .' WHERE id IN(SELECT `tag_id` FROM '. $this->prefix.(new MessagesTags())->table .' where `unique` = '.$this->prefix.$this->table.'.`unique`)), "") as tag_name'];
             $sql = "SELECT ";
             $sql .= $this->select($select, $selectsSql);
             $sql .= " FROM ".$this->prefix . $this->table;
@@ -145,7 +145,7 @@ class Messages implements InterfacesModel
             $sql .= $this->order($order); // 排序
             $sql .= $this->limit($limits); // 条数
             $list = $this->db::select($sql); // 执行
-            $selects = array_merge($select, ['cname', 'content', 'images', 'tag_name']);
+            $selects = array_merge($select, ['cname', 'content', 'tag_name']);
             // 获取参数并返回
             return array_map(function ($item) use($selects){
                 $message = [];
