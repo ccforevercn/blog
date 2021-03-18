@@ -18,7 +18,7 @@
                     <li class="clearfix">
                         <div class="l-img fl">
                             <a class="new_img" href="{{ $message['url'] }}" title="{{ $message['name'] }}">
-                                <img src="{{ $message['url'] }}" alt="{{ $message['name'] }}">
+                                <img src="{{ $message['image'] }}" alt="{{ $message['name'] }}">
                             </a>
                             <a class="tag hidden-sm-md-lg" href="{{ $message['url'] }}" title="{{ $message['name'] }}">{{ $message['cname'] }}</a>
                         </div>
