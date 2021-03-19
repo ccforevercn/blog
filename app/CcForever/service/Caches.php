@@ -215,7 +215,7 @@ class Caches
                                 // 信息地址
                                 foreach ($messages as &$message) { $message['url'] =  $this->util->url($message, $public['configs']); }
                                 // 页数大于1时重置栏目地址
-                                if($page > 1){$column['url'] =  str_replace($public['configs'],'', $url).'-'.$page.$public['configs'];}
+                                if($page > 1){$column['url'] =  str_replace($public['configs']['config_page_suffix'],'', $url).'-'.$page.$public['configs']['config_page_suffix'];}
                                 // 合并 栏目、当前页、顶级栏目、顶级栏目的子栏目、面包屑导航、信息列表、导航编号 为一个数组
                                 $basic = compact('column', 'page', 'firstColumn', 'children', 'crumbs', 'messages', 'navigationId');
                                 // 合并公共数据为新的数组
