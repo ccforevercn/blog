@@ -136,7 +136,6 @@ import {
   DeleteDelete,
   GetMenu,
   GetMenus,
-  GetRules,
 } from "@/api/rules";
 import { inArray, arrayKey } from "@/utils/array";
 import { mapGetters } from "vuex";
@@ -173,6 +172,7 @@ export default {
       var that = this;
       GetCount(that.where).then((response) => {
         that.count = response.count;
+        that.list = null;
         if(that.count > 0) { that.getList(); }
       });
     },
@@ -187,8 +187,8 @@ export default {
           type: "warning",
         })
         .then(() => {
-          SetDelete({ id: rule.id }).then(() => {
-            that.getList();
+          DeleteDelete({ id: rule.id }).then(() => {
+            that.getCount();
           });
         })
         .catch(() => {

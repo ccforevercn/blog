@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth'
+import store from '@/store'
 
 var url = process.env.VUE_APP_BASE_URL || location.origin;
 var base = url + process.env.VUE_APP_BASE_API;
@@ -46,6 +47,11 @@ service.interceptors.response.use(
             type: 'error',
             duration: 3 * 1000
           })
+          store.dispatch('user/logout')
+          var timer = setTimeout(function () {
+            clearTimeout(timer)
+            location.reload()
+          }, 3000)
       }
     } else {
       return Promise.reject(String(res))

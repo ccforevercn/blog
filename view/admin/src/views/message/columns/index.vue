@@ -423,6 +423,7 @@ export default {
       var that = this;
       GetCount(that.where).then((response) => {
         that.count = response.count;
+        that.list = null;
         if(that.count > 0){ that.getList(); }
       });
     },
