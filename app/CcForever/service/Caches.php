@@ -184,10 +184,11 @@ class Caches
                 $columnIds = array_map(function ($item){ return $item['id']; }, $columns); // 获取栏目编号
             }
             if(!count($columnIds)) { return []; } // 暂无栏目编号
-            $public = $this->publicRepository(); // 公共数据
+            $publicDefault = $this->publicRepository(); // 公共数据
             $repository = []; // 默认返回数据
             $columns = $this->columns->messages($columnIds); // 栏目信息
             foreach ($columns as $column) {
+                $public = $publicDefault; // 重置公共配置
                 $page = 1; // 默认页
                 $messages = []; // 默认信息列表
                 // 页面缓存
@@ -253,12 +254,13 @@ class Caches
                 $messageIds = array_map(function ($item) {return $item['id'];}, $messages); // 获取信息编号
             }
             if(!count($messageIds)) { return []; } // 暂无信息编号
-            $public = $this->publicRepository(); // 公共数据
+            $publicDefault = $this->publicRepository(); // 公共数据
             $repository = []; // 默认返回数据
             // 查询字段
             $selects = ['id', 'name', 'columns_id', 'image', 'keywords', 'description', 'update_time', 'writer', 'click', 'page'];
             $messages = $this->messages->messages($selects, ['id' => $messageIds], ['id' => 'DESC'], 0, 0);
             foreach ($messages as &$message) {
+                $public = $publicDefault; // 重置公共配置
                 $message['tags'] = explode(',', $message['tag_name']); // 信息标签
                 $message['url'] = $this->util->url($message, $public['configs']); // 信息地址
                 $column = $this->columns->message($message['columns_id'], []); // 栏目信息
@@ -343,7 +345,7 @@ class Caches
                 case true: $columns = $this->columnsRepository([$columnId]); break; // 缓存指定栏目
                 default: $columns = $this->columnsRepository([]); // 所有栏目缓存
             }
-            foreach ($columns as $column){
+            foreach ($columns as &$column){
                 $this->folder($column['column']['url']);
                 $resources = $this->style.$column['column']['page']; // 资源文件
                 // 目标文件  清除地址第一个字符/
