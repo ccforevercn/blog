@@ -184,12 +184,12 @@ class Caches
                 $columnIds = array_map(function ($item){ return $item['id']; }, $columns); // 获取栏目编号
             }
             if(!count($columnIds)) { return []; } // 暂无栏目编号
-            $messages = []; // 默认信息列表
-            $page = 1; // 默认页
             $public = $this->publicRepository(); // 公共数据
             $repository = []; // 默认返回数据
             $columns = $this->columns->messages($columnIds); // 栏目信息
             foreach ($columns as $column) {
+                $page = 1; // 默认页
+                $messages = []; // 默认信息列表
                 // 页面缓存
                 if(!$column['render']) {
                     $firstColumn = $this->firstColumn($column);  // 顶级栏目信息
@@ -215,7 +215,7 @@ class Caches
                                 // 信息地址
                                 foreach ($messages as &$message) { $message['url'] =  $this->util->url($message, $public['configs']); }
                                 // 页数大于1时重置栏目地址
-                                if($page > 1){$column['url'] =  str_replace($public['configs']['config_page_suffix'],'', $url).'-'.$page.$public['configs']['config_page_suffix'];}
+                                if($page > 1){ $column['url'] =  str_replace($public['configs']['config_page_suffix'],'', $url).'-'.$page.$public['configs']['config_page_suffix'];}
                                 // 合并 栏目、当前页、顶级栏目、顶级栏目的子栏目、面包屑导航、信息列表、导航编号 为一个数组
                                 $basic = compact('column', 'page', 'firstColumn', 'children', 'crumbs', 'messages', 'navigationId');
                                 // 合并公共数据为新的数组
@@ -230,7 +230,7 @@ class Caches
                     }catch (ExceptionsMessages $exception) { throw new ExceptionsCaches($exception->getMessage()); }
                 }
             }
-        }catch (ExceptionsColumns $exception) { throw new ExceptionsCaches($exception->getMessage()); }
+        }catch (ExceptionsColumns $exception) { throw new ExceptionsCaches($exception->getMessage());}
         return  $repository;
     }
 
@@ -343,7 +343,7 @@ class Caches
                 case true: $columns = $this->columnsRepository([$columnId]); break; // 缓存指定栏目
                 default: $columns = $this->columnsRepository([]); // 所有栏目缓存
             }
-            foreach ($columns as &$column){
+            foreach ($columns as $column){
                 $this->folder($column['column']['url']);
                 $resources = $this->style.$column['column']['page']; // 资源文件
                 // 目标文件  清除地址第一个字符/
