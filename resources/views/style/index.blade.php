@@ -68,8 +68,6 @@
                     @endforeach
                 </div>
             @endif
-            <!--广告位1-->
-            <div style="width:100%;height:90px; line-height:90px;overflow:hidden;margin:25px 0 0 0;border:1px #f60 dashed;text-align:center;background:#fff;"> 广告位：885PX-90PX</div>
             @php
                 $newsMessages = (new \App\CcForever\service\Repository())->messages(0, 1, 5, ['update_time' => 'DESC'], 1)
             @endphp
@@ -99,13 +97,13 @@
                 </div>
             @endif
             @php
-                $videoColumn = (new \App\CcForever\service\Repository())->column(6, ['name']);
-                $videoMessages = (new \App\CcForever\service\Repository())->messages(6, 1, 6, ['update_time' => 'DESC'], 1)
+                $column = (new \App\CcForever\service\Repository())->column(6, ['name']);
+                $messages = (new \App\CcForever\service\Repository())->messages(6, 1, 6, ['update_time' => 'DESC'], 1)
             @endphp
-            @if(count($videoColumn))
+            @if(count($column))
                 <div class="stars clearfix">
-                    <div class="box_title clearfix"><span><i class="icon news_icon fa fa-file-text"></i>{{ $videoColumn['name'] }}</span> <a class="fr" href="{{ $videoColumn['url'] }}" title="{{ $videoColumn['name'] }}">更多<i class="fa fa-angle-right"></i></a></div>
-                    @foreach($videoMessages as $message)
+                    <div class="box_title clearfix"><span><i class="icon news_icon fa fa-file-text"></i>{{ $column['name'] }}</span> <a class="fr" href="{{ $column['url'] }}" title="{{ $column['name'] }}">更多<i class="fa fa-angle-right"></i></a></div>
+                    @foreach($messages as $message)
                         <article class="stars_article fl">
                             <div class="stars_img">
                                 <a href="{{ $message['url'] }}" title="{{ $message['name'] }}">
@@ -123,13 +121,13 @@
                 </div>
             @endif
             @php
-                $sportsColumn = (new \App\CcForever\service\Repository())->column(2, ['name']);
-                $sportsMessages = (new \App\CcForever\service\Repository())->messages(2, 1, 2, ['update_time' => 'DESC'], 1)
+                $column = (new \App\CcForever\service\Repository())->column(2, ['name']);
+                $messages = (new \App\CcForever\service\Repository())->messages(2, 1, 2, ['update_time' => 'DESC'], 1)
             @endphp
-            @if(count($sportsColumn))
+            @if(count($column))
                 <div class="lastnews">
-                    <div class="box_title clearfix"> <span><i class="icon fa fa-fire"></i>{{ $sportsColumn['name'] }}</span> <a class="fr" href="{{ $sportsColumn['url'] }}" title="{{ $sportsColumn['name'] }}">更多<i class="fa fa-angle-right"></i></a> </div>
-                    @foreach($sportsMessages as $message)
+                    <div class="box_title clearfix"> <span><i class="icon fa fa-fire"></i>{{ $column['name'] }}</span> <a class="fr" href="{{ $column['url'] }}" title="{{ $column['name'] }}">更多<i class="fa fa-angle-right"></i></a> </div>
+                    @foreach($messages as $message)
                         <article class="lastnews_article clearfix">
                             <div class="lastnews_img fl">
                                 <a href="{{ $message['url'] }}" title="{{ $message['name'] }}">
@@ -148,13 +146,13 @@
                 </div>
             @endif
             @php
-                $nbaColumn = (new \App\CcForever\service\Repository())->column(3, ['name']);
-                $nbaMessages = (new \App\CcForever\service\Repository())->messages(3, 1, 2, ['update_time' => 'DESC'], 1)
+                $column = (new \App\CcForever\service\Repository())->column(3, ['name']);
+                $messages = (new \App\CcForever\service\Repository())->messages(3, 1, 2, ['update_time' => 'DESC'], 1)
             @endphp
-            @if(count($nbaColumn))
+            @if(count($column))
                 <div class="lastnews">
-                    <div class="box_title clearfix"> <span><i class="icon fa fa-group"></i>{{ $nbaColumn['name'] }}</span> <a class="fr" href="{{ $nbaColumn['url'] }}" title="{{ $nbaColumn['name'] }}">更多<i class="fa fa-angle-right"></i></a> </div>
-                    @foreach($nbaMessages as $message)
+                    <div class="box_title clearfix"> <span><i class="icon fa fa-group"></i>{{ $column['name'] }}</span> <a class="fr" href="{{ $column['url'] }}" title="{{ $column['name'] }}">更多<i class="fa fa-angle-right"></i></a> </div>
+                    @foreach($messages as $message)
                         <article class="lastnews_article clearfix">
                             <div class="lastnews_img fl">
                                 <a href="{{ $message['url'] }}" title="{{ $message['name']  }}">
@@ -176,13 +174,13 @@
             @endif
             <div class="morenews clearfix">
                 @php
-                    $cbaColumn = (new \App\CcForever\service\Repository())->column(4, ['name']);
-                    $cbaMessages = (new \App\CcForever\service\Repository())->messages(4, 1, 6, ['update_time' => 'DESC'], 1)
+                    $column = (new \App\CcForever\service\Repository())->column(4, ['name']);
+                    $messages = (new \App\CcForever\service\Repository())->messages(4, 1, 6, ['update_time' => 'DESC'], 1)
                 @endphp
-                @if(count($cbaColumn))
+                @if(count($column))
                     <div class="sportsnew fl">
-                        <div class="box_title clearfix"><span><i class="icon more_icon fa fa-paper-plane-o"></i>{{ $cbaColumn['name'] }}</span> <a class="fr"  href="{{ $cbaColumn['url'] }}" title="{{ $cbaColumn['name'] }}">更多<i class="fa fa-angle-right"></i></a> </div>
-                        @foreach($cbaMessages as $message)
+                        <div class="box_title clearfix"><span><i class="icon more_icon fa fa-paper-plane-o"></i>{{ $column['name'] }}</span> <a class="fr"  href="{{ $column['url'] }}" title="{{ $column['name'] }}">更多<i class="fa fa-angle-right"></i></a> </div>
+                        @foreach($messages as $message)
                             @if($loop->first)
                                 <div class="big_block">
                                     <article class="morenews_article clearfix">
@@ -199,7 +197,7 @@
                                 </div>
                             @endif
                         @endforeach
-                        @foreach($cbaMessages as $message)
+                        @foreach($messages as $message)
                             @if(!$loop->first)
                                 <ul class="box">
                                     <li class="clearfix"> <i></i>
@@ -211,13 +209,13 @@
                     </div>
                 @endif
                 @php
-                    $soccerColumn = (new \App\CcForever\service\Repository())->column(5, ['name']);
-                    $soccerMessages = (new \App\CcForever\service\Repository())->messages(5, 1, 6, ['update_time' => 'DESC'], 1)
+                    $column = (new \App\CcForever\service\Repository())->column(5, ['name']);
+                    $messages = (new \App\CcForever\service\Repository())->messages(5, 1, 6, ['update_time' => 'DESC'], 1)
                 @endphp
-                @if(count($soccerColumn))
+                @if(count($column))
                     <div class="sportsnew fl">
-                        <div class="box_title clearfix"><span><i class="icon more_icon fa fa-paper-plane-o"></i>{{ $soccerColumn['name'] }}</span><a class="fr" href="{{ $soccerColumn['url'] }}" title="{{ $soccerColumn['name'] }}">更多<i class="fa fa-angle-right"></i></a></div>
-                        @foreach($soccerMessages as $message)
+                        <div class="box_title clearfix"><span><i class="icon more_icon fa fa-paper-plane-o"></i>{{ $column['name'] }}</span><a class="fr" href="{{ $column['url'] }}" title="{{ $column['name'] }}">更多<i class="fa fa-angle-right"></i></a></div>
+                        @foreach($messages as $message)
                             @if($loop->first)
                                 <div class="big_block">
                                     <article class="morenews_article clearfix">
@@ -234,12 +232,14 @@
                                 </div>
                             @endif
                         @endforeach
-                        @foreach($soccerMessages as $message)
+                        @foreach($messages as $message)
                             @if(!$loop->first)
                                 <ul class="box">
-                                    <li class="clearfix"> <i></i>
-                                        <h4><a href="{{ $message['url'] }}" title="{{ $message['name'] }}">{{ $message['name'] }}</a></h4>
-                                        <strong class="fr">[{{ $message['update_time'] }}]</strong> </li>
+                                    <li class="clearfix">
+                                        <i></i>
+                                        <h4><a href="{{ $message['url'] }}" title="{{ $message['name'] }}">{{ (new \App\CcForever\service\Util())->cutString($message['name'], 0, 19, true, '...')  }}</a></h4>
+                                        <strong class="fr">[{{ $message['update_time'] }}]</strong>
+                                    </li>
                                 </ul>
                             @endif
                         @endforeach
@@ -249,7 +249,7 @@
         </div>
         @include('style.right')
         <div class="friendlink fl">
-            <div class="box_title"> <span><i class="icon link_icon fa fa-link"></i>友情链接</span> <span class="friendlink_ruler">申请条件：内容上要求属于同类网站，并且没有出现任何的作弊现象</span> </div>
+            <div class="box_title"> <span><i class="icon link_icon fa fa-link"></i>友情链接</span> <span class="friendlink_ruler"></span> </div>
             <ul class="clearfix">
                 @foreach($links as $link)
                     @if($link['follow'])
