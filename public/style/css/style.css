@@ -2223,6 +2223,9 @@ i.fa-rss {
 	letter-spacing: 1.1px;
 	text-align: left;
 }
+.detail_main .detail_article pre{
+    overflow-x: auto;
+}
 .detail_main img[src*=UEditor] {
 	width: 19px;
 	height: 21px;
